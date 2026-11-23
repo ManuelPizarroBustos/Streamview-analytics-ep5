@@ -1,80 +1,67 @@
 # StreamView Analytics: Solución Integral de Visual Analytics
 
-Repositorio oficial correspondiente al proyecto semestral de la asignatura **Visualización de Datos_001D** (Duoc UC). Este proyecto tiene como objetivo transformar un alto volumen de datos fragmentados en una solución de Business Intelligence y *Visual Analytics* para apoyar la toma de decisiones estratégicas en la plataforma de streaming digital *StreamView Analytics*.
+Repositorio oficial correspondiente al proyecto de la asignatura **Visualización de Datos_001D** (Duoc UC). El objetivo de este trabajo es consolidar información fragmentada del catálogo audiovisual de **StreamView Analytics** (películas y series) en una solución interactiva de *Visual Analytics* que apoye la toma de decisiones estratégicas.
 
 ---
 
 ## 📁 Estructura del Repositorio
 
-El proyecto se encuentra organizado siguiendo una estructura profesional orientada a la reproducibilidad:
-
 ```text
-streamview-analytics/
+streamview-analytics-ep5/
 │
 ├── data/
 │   ├── netflix_movies_detailed_up_to_2025.csv     # Dataset oficial de películas
-│   └── netflix_tv_shows_detailed_up_to_2025.csv   # Dataset oficial de series
+│   ├── netflix_tv_shows_detailed_up_to_2025.csv   # Dataset oficial de series
+│   └── streamview_master_dataset.csv              # Dataset maestro generado por el script ETL
 │
 ├── src/
-│   └── 01_preparacion_datos.py                    # Script ETL en Python (Pandas) para limpieza y unificación
+│   └── 01_preparacion_datos.py                    # Pipeline en Python (Pandas / NumPy) de limpieza y transformación
 │
 ├── dashboard/
-│   └── StreamView_Dashboard.pbix                  # Archivo principal de Power BI con los 3 dashboards interactivos
+│   └── StreamView_Dashboard.pbix                  # Archivo de Power BI con los 3 dashboards interactivos
 │
 ├── docs/
-│   ├── Informe_Ejecutivo_StreamView.pdf           # Informe ejecutivo formal (Evaluación Final / EP5)
-│   └── Resumen_Ejecutivo_Presentacion.pptx        # Presentación ejecutiva en diapositivas para la defensa
+│   ├── Informe_Ejecutivo_StreamView.pdf           # Informe ejecutivo formal con evaluación crítica
+│   └── Resumen_Ejecutivo_Presentacion.pptx        # Presentación ejecutiva de apoyo para la exposición
 │
-└── README.md                                      # Documentación técnica del proyecto
-🛠️ Tecnologías y Herramientas Utilizadas
-Python (Pandas / VS Code): Utilizado en la fase de Análisis Exploratorio de Datos (EDA) y limpieza (ETL) para estandarizar formatos regionales, unificar géneros principales, corregir saltos de línea y calcular variables de rendimiento financiero (ROI).
+└── README.md                                      # Documentación general del proyecto
+```
 
-Microsoft Power BI: Herramienta principal de visualización para el desarrollo de los tres dashboards obligatorios, incorporando segmentadores interactivos, KPIs y filtros de confianza estadística.
+---
 
-Git & GitHub: Control de versiones bajo flujos de trabajo colaborativos para la gestión y entrega de los artefactos del proyecto.
+## 🛠️ Tecnologías y Herramientas
 
-📊 Arquitectura de los Dashboards
-La solución de Power BI está estructurada en tres niveles analíticos principales:
+* **Python (`pandas`, `numpy`) y VS Code:** Limpieza de saltos de línea (`\n`, `\r`), manejo de nulos, extracción de variables principales (`genero_principal`, `pais_principal`, `idioma_principal`, `año_agregado`), cálculo de `roi` y `aplica_analisis_financiero`, y exportación del dataset maestro.
+* **Microsoft Power BI:** Construcción de tres vistas interactivas con segmentadores, filtros y métricas orientadas a distintos perfiles de decisión.
+* **Git y GitHub:** Control de versiones y publicación ordenada de los entregables del proyecto.
 
-Dashboard Ejecutivo (Directorio y Gerencia General):
+---
 
-Ofrece una visión macro del catálogo, integrando tarjetas de KPIs globales (Total de contenidos, géneros, países representados y diversidad lingüística).
+## 📊 Estructura de los Dashboards
 
-Incorpora mapas coropléticos de producción geográfica e indicadores temporales de evolución del catálogo.
+1. **Dashboard Ejecutivo (Directorio y Gerencia General):** Panorama general del catálogo (~32.000 registros entre películas y series, cobertura geográfica y de idiomas, evolución temporal y mapa de producción liderado por Estados Unidos).
+2. **Dashboard Analítico (Gerencia de Contenidos y Adquisición):** Análisis de valoración, popularidad y desempeño financiero en películas (donde aplican `budget` e `revenue`), incluyendo el filtro de más de 1.000 votos para reducir el sesgo de muestras pequeñas en el ranking de mejor evaluados (*Chernobyl*, *Regular Show*, *Primal*).
+3. **Dashboard de Marketing:** Exploración de popularidad y volumen por género para orientar campañas y retención, destacando el *Treemap* de géneros (*Drama*, *Comedia* y *Animación*) y el liderazgo en popularidad de formatos recurrentes como *The Late Show with Stephen Colbert*.
 
-Dashboard Analítico (Gerencia de Contenidos y Adquisición):
+---
 
-Integra un análisis financiero profundo (Dispersión de Presupuesto vs. Ingresos y cálculo del ROI aproximado).
+## 🚀 Instrucciones de Reproducción
 
-Incorpora rankings depurados mediante umbrales de confianza estadística (filtro estricto de >1000 votos) para evitar sesgos en el Top 10 de contenidos mejor evaluados (Chernobyl, Regular Show, Primal).
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/ManuelPizarroBustos/Streamview-analytics-ep5.git
+   ```
+2. **Preparar el entorno e instalar dependencias:**
+   ```bash
+   pip install pandas numpy
+   ```
+3. **Ejecutar el script de preparación de datos:**
+   Ejecuta `src/01_preparacion_datos.py` desde la carpeta `src/` (o ajusta las rutas según tu entorno) para generar `data/streamview_master_dataset.csv` a partir de los CSV originales en `data/`.
+4. **Abrir el dashboard y los documentos:**
+   Abre `dashboard/StreamView_Dashboard.pbix` en **Power BI Desktop** y revisa los documentos finales en la carpeta `docs/`.
 
-Dashboard de Marketing:
+---
 
-Analiza la popularidad de los contenidos para guiar campañas promocionales, destacando el rendimiento de formatos de retención diaria (The Late Show with Stephen Colbert) y la distribución del Treemap por géneros (Drama, Comedia y Animación).
-
-🚀 Instrucciones de Reproducción
-Para ejecutar y validar la solución de manera local sin modificaciones adicionales:
-
-Clonar el repositorio:
-
-Bash
-git clone https://github.com/ManuelPizarroBustos/Streamview-analytics-ep5.git
-Ejecutar el Pipeline de Datos (Python):
-
-Asegúrate de tener Python y la librería Pandas instalada (pip install pandas).
-
-Ejecuta el script ubicado en la carpeta src/ para procesar los archivos base de la carpeta data/.
-
-Explorar el Dashboard:
-
-Abre el archivo .pbix ubicado en la carpeta dashboard/ utilizando Microsoft Power BI Desktop.
-
-Revisar la Documentación:
-
-El informe ejecutivo completo en formato PDF y la presentación de resumen se encuentran disponibles en la carpeta docs/.
-
-Asignatura: Visualización de Datos_001D
-
-Institución: Duoc UC
-
-Año: 2026
+* **Asignatura:** Visualización de Datos_001D
+* **Institución:** Duoc UC
+* **Año:** 2026
